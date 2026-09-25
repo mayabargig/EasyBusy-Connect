@@ -19,4 +19,5 @@ This file tracks each requirement so no item is forgotten near the deadline.
 | Required CSS3 features | Text shadow, transitions, multiple columns, font face and border radius | Complete |
 | Socket.io chat | Persistent, authenticated real-time conversations | Complete |
 | Two dynamic D3 charts | Appointment status donut and monthly activity bars | Complete |
-| Personal/original code | New repository and new implementation | In progress and documented by Git milestones |
+| Realistic demo content | Guarded, repeatable seed for users, posts, appointments and messages | Complete |
+| Personal/original code | New repository and new implementation | Complete and documented by Git milestones |

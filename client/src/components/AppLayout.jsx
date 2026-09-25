@@ -1,9 +1,15 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { CanvasLogo } from "./CanvasLogo";
 
 export function AppLayout() {
   const { isAuthenticated, logout, user } = useAuth();
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    logout();
+    navigate("/login", { replace: true });
+  }
 
   return (
     <div className="app-shell">
@@ -24,7 +30,7 @@ export function AppLayout() {
               <NavLink to="/chat">Chat</NavLink>
               <NavLink to="/stats">Stats</NavLink>
               <NavLink to="/profile">My profile</NavLink>
-              <button className="link-button" onClick={logout} type="button">
+              <button className="link-button" onClick={handleLogout} type="button">
                 Log out
               </button>
             </>

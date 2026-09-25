@@ -33,9 +33,9 @@ export function HomePage() {
         </div>
 
         <div className="hero-card" aria-label="Product preview">
-          <span className="preview-badge">Coming in the next milestone</span>
+          <span className="preview-badge">Live community preview</span>
           <h2>Find your next favorite place</h2>
-          <div className="mock-search">Coffee · Tel Aviv · 4+ stars</div>
+          <div className="mock-search">Beauty · Tel Aviv · Available services</div>
           <div className="mock-result">
             <span className="mock-avatar">BC</span>
             <div>

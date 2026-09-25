@@ -30,6 +30,8 @@ The completed milestones include:
 - jQuery Ajax used by the shared API layer for all REST requests
 - Scoped jQuery View transitions for dynamic business, post, appointment and statistics cards
 - All required CSS3 features: text shadow, transitions, multiple columns, font face and border radius
+- Safe, repeatable demo-data seed for defense preparation
+- Logout navigation that prevents a new account from reopening another user's chat URL
 
 Progress is tracked in [`docs/requirements-map.md`](docs/requirements-map.md).
 
@@ -73,10 +75,35 @@ EasyBusy-Connect/
 
 5. Open `http://localhost:5173`.
 
+## Optional demo data
+
+The demo seed creates three dedicated accounts together with businesses,
+services, posts, appointments and chat history. It replaces records belonging
+to those demo accounts only; normal users and their content are not removed.
+
+1. Add a private local password to `server/.env` and temporarily enable the seed:
+
+   ```env
+   ALLOW_DEMO_SEED=true
+   DEMO_PASSWORD=your-private-demo-password
+   ```
+
+2. Run the seed once from the project root:
+
+   ```bash
+   npm run seed
+   ```
+
+3. Set `ALLOW_DEMO_SEED=false` again after the data is created.
+
+The command prints the three demo email addresses. Their shared password is
+read from `DEMO_PASSWORD` and is never stored in Git.
+
 ## Useful commands
 
 ```bash
 npm run dev
+npm run seed
 npm run build
 npm run lint
 npm run check

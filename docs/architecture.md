@@ -180,6 +180,28 @@ The CSS3 checklist is visible in the interface:
 - `font-face`: the local EasyBusy text face used by that explanation.
 - `border-radius`: cards, buttons, badges and the multi-column panel.
 
+## Stage 8 defense preparation
+
+The demo seed is an explicit development command, not an API endpoint. It can
+run only when `ALLOW_DEMO_SEED=true` and refuses to run in production. The
+password comes from `DEMO_PASSWORD`, so no usable credential is committed.
+
+```text
+npm run seed
+   ↓ safety checks
+Upsert three dedicated demo users
+   ↓ remove records involving demo users only
+Create services, posts, appointments and messages
+```
+
+Running the command again produces a predictable demo state without creating
+duplicates. It never removes a normal user, normal post or normal appointment.
+
+Logout now clears the session and navigates directly to `/login`. This avoids
+React Router preserving a private `/chat/:userId` location and prevents a
+different account from requesting the previous account's conversation after
+login.
+
 On successful login, the server signs a JWT containing only the user's database identifier. The client stores the token and sends it in the `Authorization` header when requesting a protected resource.
 
 ## Server responsibilities
