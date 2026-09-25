@@ -13,10 +13,10 @@ This file tracks each requirement so no item is forgotten near the deadline.
 | Two searches with 3+ parameters | Business discovery and post feed search | Complete |
 | Validation and error handling | express-validator, Mongoose and shared middleware | Stage 1 complete |
 | React | Client application | Stage 1 complete |
-| Extensive jQuery + Ajax | Separate data-management page | Planned |
+| Extensive jQuery + Ajax | Shared `$.ajax` API layer plus scoped View enhancements | Complete |
 | Video | Video posts rendered with the React video element | Complete |
 | Canvas | Programmatically drawn appointment logo in the React header | Complete |
-| Required CSS3 features | Dedicated design checklist | Border radius and transitions complete |
+| Required CSS3 features | Text shadow, transitions, multiple columns, font face and border radius | Complete |
 | Socket.io chat | Persistent, authenticated real-time conversations | Complete |
 | Two dynamic D3 charts | Appointment status donut and monthly activity bars | Complete |
-| Personal/original code | New repository and new implementation | In progress |
+| Personal/original code | New repository and new implementation | In progress and documented by Git milestones |

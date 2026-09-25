@@ -1,6 +1,7 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { postCategories, postCategoryLabel } from "../constants/postCategories";
 import { useAuth } from "../hooks/useAuth";
+import { useJQueryReveal } from "../hooks/useJQueryReveal";
 import { api, getApiErrorMessage } from "../services/api";
 
 const emptyPost = {
@@ -108,6 +109,9 @@ export function PostsPage() {
   const [success, setSuccess] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const postListRef = useRef(null);
+
+  useJQueryReveal(postListRef, posts.map((post) => post.id).join("|"));
 
   const loadPosts = useCallback(async (searchFilters = emptyFilters) => {
     setError("");
@@ -290,9 +294,9 @@ export function PostsPage() {
             </div>
           )}
 
-          <div className="post-list">
+          <div className="post-list" ref={postListRef}>
             {posts.map((post) => (
-              <article className="post-card" key={post.id}>
+              <article className="post-card" data-jquery-reveal key={post.id}>
                 <header className="post-card-header">
                   <span className="post-author-avatar">
                     {post.author?.avatarUrl

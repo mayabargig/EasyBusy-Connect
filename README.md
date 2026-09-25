@@ -27,10 +27,11 @@ The completed milestones include:
 - Authenticated real-time chat with Socket.io
 - Persistent message history, search, editing and deletion
 - Two dynamic D3.js appointment charts backed by MongoDB aggregations
+- jQuery Ajax used by the shared API layer for all REST requests
+- Scoped jQuery View transitions for dynamic business, post, appointment and statistics cards
+- All required CSS3 features: text shadow, transitions, multiple columns, font face and border radius
 
-Future milestones will add the required jQuery/Ajax module and complete the
-remaining CSS3 checklist. Progress is tracked in
-[`docs/requirements-map.md`](docs/requirements-map.md).
+Progress is tracked in [`docs/requirements-map.md`](docs/requirements-map.md).
 
 ## Project structure
 

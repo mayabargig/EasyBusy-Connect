@@ -1,10 +1,11 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
   appointmentStatusLabel,
   appointmentStatuses,
 } from "../constants/appointmentStatuses";
 import { useAuth } from "../hooks/useAuth";
+import { useJQueryReveal } from "../hooks/useJQueryReveal";
 import { api, getApiErrorMessage } from "../services/api";
 
 const initialFilters = { q: "", status: "", dateFrom: "", dateTo: "" };
@@ -42,6 +43,12 @@ export function AppointmentsPage() {
   const [success, setSuccess] = useState(location.state?.message || "");
   const [isLoading, setIsLoading] = useState(true);
   const [busyId, setBusyId] = useState("");
+  const appointmentListRef = useRef(null);
+
+  useJQueryReveal(
+    appointmentListRef,
+    appointments.map((appointment) => `${appointment.id}:${appointment.status}`).join("|"),
+  );
 
   const loadAppointments = useCallback(async (searchFilters) => {
     setError("");
@@ -217,7 +224,7 @@ export function AppointmentsPage() {
       )}
 
       {!isLoading && appointments.length > 0 && (
-        <div className="appointment-list">
+        <div className="appointment-list" ref={appointmentListRef}>
           {appointments.map((appointment) => {
             const otherParty = isBusinessOwner ? appointment.customer : appointment.business;
             const partyName = isBusinessOwner
@@ -226,7 +233,7 @@ export function AppointmentsPage() {
             const canDelete = ["cancelled", "declined", "completed"].includes(appointment.status);
 
             return (
-              <article className="appointment-card" key={appointment.id}>
+              <article className="appointment-card" data-jquery-reveal key={appointment.id}>
                 <header className="appointment-card-header">
                   <div>
                     <span className="appointment-date">{formatAppointmentDate(appointment.startAt)}</span>

@@ -1,5 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap");
 
+@font-face {
+  font-family: "EasyBusy Local";
+  src: local("Trebuchet MS"), local("Arial");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400 800;
+}
+
 :root {
   color: #17302c;
   background: #f7f8f2;
@@ -165,6 +173,11 @@ main {
   margin-bottom: 26px;
 }
 
+.hero h1,
+.page-heading h1 {
+  text-shadow: 0 3px 0 rgba(31, 111, 95, 0.09);
+}
+
 .hero-copy > p,
 .auth-intro > p {
   max-width: 600px;
@@ -221,6 +234,41 @@ main {
 .button:disabled {
   cursor: wait;
   opacity: 0.7;
+}
+
+.jquery-reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 260ms ease, transform 260ms ease;
+}
+
+.jquery-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.platform-story {
+  padding-block: 40px 110px;
+}
+
+.platform-story-columns {
+  column-count: 3;
+  column-gap: 36px;
+  column-rule: 1px solid var(--line);
+  padding: 32px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--paper);
+  box-shadow: var(--shadow);
+  color: var(--muted);
+  font-family: "EasyBusy Local", "DM Sans", sans-serif;
+  font-size: 1.02rem;
+  line-height: 1.75;
+}
+
+.platform-story-columns p {
+  break-inside: avoid;
+  margin-bottom: 0;
 }
 
 .full-width {
@@ -1946,6 +1994,10 @@ main {
 }
 
 @media (max-width: 850px) {
+  .platform-story-columns {
+    column-count: 2;
+  }
+
   .site-header {
     flex-wrap: wrap;
   }
@@ -2038,6 +2090,11 @@ main {
 }
 
 @media (max-width: 560px) {
+  .platform-story-columns {
+    column-count: 1;
+    padding: 24px;
+  }
+
   .section-container {
     width: min(100% - 28px, 1180px);
   }

@@ -1,6 +1,7 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { businessCategories, categoryLabel } from "../constants/businessCategories";
+import { useJQueryReveal } from "../hooks/useJQueryReveal";
 import { api, getApiErrorMessage } from "../services/api";
 
 const initialFilters = { q: "", city: "", category: "" };
@@ -10,6 +11,9 @@ export function DiscoverPage() {
   const [businesses, setBusinesses] = useState([]);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const resultsRef = useRef(null);
+
+  useJQueryReveal(resultsRef, businesses.map((business) => business.id).join("|"));
 
   const searchBusinesses = useCallback(async (searchFilters) => {
     setError("");
@@ -94,11 +98,11 @@ export function DiscoverPage() {
       )}
 
       {!isLoading && businesses.length > 0 && (
-        <div className="business-grid">
+        <div className="business-grid" ref={resultsRef}>
           {businesses.map((business) => {
             const profile = business.businessProfile || {};
             return (
-              <article className="business-card" key={business.id}>
+              <article className="business-card" data-jquery-reveal key={business.id}>
                 <div className="business-card-topline">
                   <span className="business-avatar">
                     {business.avatarUrl

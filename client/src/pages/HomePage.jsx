@@ -61,7 +61,27 @@ export function HomePage() {
           ))}
         </div>
       </section>
+
+      <section className="platform-story section-container" aria-labelledby="platform-story-title">
+        <div className="section-heading">
+          <span className="eyebrow">How the community works</span>
+          <h2 id="platform-story-title">One place for discovery, conversation and booking</h2>
+        </div>
+        <div className="platform-story-columns">
+          <p>
+            Customers discover nearby businesses with focused search filters,
+            compare available services and open a public profile before booking.
+          </p>
+          <p>
+            Business owners publish community updates, present their services
+            and manage every incoming appointment from a protected workspace.
+          </p>
+          <p>
+            Both sides can keep in touch through real-time chat, while the
+            statistics area turns current appointment data into useful insights.
+          </p>
+        </div>
+      </section>
     </>
   );
 }
-

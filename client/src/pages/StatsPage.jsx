@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { MonthlyAppointmentsChart } from "../components/charts/MonthlyAppointmentsChart";
 import { StatusDonutChart } from "../components/charts/StatusDonutChart";
 import { useAuth } from "../hooks/useAuth";
+import { useJQueryReveal } from "../hooks/useJQueryReveal";
 import { api, getApiErrorMessage } from "../services/api";
 
 export function StatsPage() {
@@ -10,6 +11,9 @@ export function StatsPage() {
   const [months, setMonths] = useState(6);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const statsRef = useRef(null);
+
+  useJQueryReveal(statsRef, stats ? `${months}:${stats.totalAppointments}` : "");
 
   const loadStats = useCallback(async () => {
     setError("");
@@ -42,7 +46,7 @@ export function StatsPage() {
   }, [stats]);
 
   return (
-    <section className="stats-page section-container">
+    <section className="stats-page section-container" ref={statsRef}>
       <div className="page-heading stats-heading">
         <div>
           <span className="eyebrow">Live MongoDB insights</span>
@@ -70,26 +74,26 @@ export function StatsPage() {
       {stats && (
         <>
           <div className="stats-summary-grid">
-            <article>
+            <article data-jquery-reveal>
               <span>Total appointments</span>
               <strong>{stats.totalAppointments}</strong>
             </article>
-            <article>
+            <article data-jquery-reveal>
               <span>Upcoming</span>
               <strong>{summary.upcoming}</strong>
             </article>
-            <article>
+            <article data-jquery-reveal>
               <span>Completed</span>
               <strong>{summary.completed}</strong>
             </article>
-            <article>
+            <article data-jquery-reveal>
               <span>Cancelled or declined</span>
               <strong>{summary.cancelled}</strong>
             </article>
           </div>
 
           <div className="stats-chart-grid">
-            <article className="chart-card">
+            <article className="chart-card" data-jquery-reveal>
               <header>
                 <span className="eyebrow">D3 donut chart</span>
                 <h2>Appointments by status</h2>
@@ -98,7 +102,7 @@ export function StatsPage() {
               <StatusDonutChart data={stats.byStatus} />
             </article>
 
-            <article className="chart-card monthly-card">
+            <article className="chart-card monthly-card" data-jquery-reveal>
               <header>
                 <span className="eyebrow">D3 bar chart</span>
                 <h2>Monthly appointment activity</h2>

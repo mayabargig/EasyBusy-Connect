@@ -13,7 +13,7 @@ The browser never connects directly to MongoDB. It sends HTTP requests to the AP
 
 ```text
 React form
-   ↓ Axios request
+   ↓ jQuery Ajax request
 Express route
    ↓ Request validation
 Auth controller
@@ -30,7 +30,7 @@ would duplicate identity, login and contact fields.
 
 ```text
 Profile or discovery page
-   ↓ Axios request with JWT
+   ↓ jQuery Ajax request with JWT
 User route
    ↓ Authentication and validation middleware
 User controller
@@ -73,7 +73,7 @@ name, duration and price if the business later edits its service list.
 
 ```text
 Customer chooses a service and time
-   ↓ Axios POST request with JWT
+   ↓ jQuery Ajax POST request with JWT
 Appointment route validates the input
    ↓ Appointment controller checks roles and time conflicts
 Appointment model stores the request in MongoDB
@@ -151,6 +151,34 @@ of 3, 6 or 12 months.
 The donut chart uses `d3.pie` and `d3.arc` for a part-to-whole view. The bar
 chart uses band and linear scales together with D3 axes. Both charts handle an
 empty database without invalid SVG values or page errors.
+
+## Stage 7 jQuery Ajax and CSS3 flow
+
+The shared client API service uses `$.ajax` for every REST request. It adds the
+JWT header, serializes JSON request bodies, sends query parameters and converts
+jQuery callbacks into Promises. The small compatibility response object keeps
+the React pages focused on their own state instead of the Ajax implementation.
+
+```text
+React View
+   ↓ api.get / api.post / api.patch / api.delete
+Shared jQuery $.ajax service
+   ↓ Authorization header + JSON
+Express REST API
+```
+
+The reusable `useJQueryReveal` hook demonstrates scoped jQuery DOM work in the
+business directory, community feed, appointments page and statistics page. It
+uses jQuery selection and class operations only inside a React `ref`; React
+continues to own creation and removal of every element.
+
+The CSS3 checklist is visible in the interface:
+
+- `text-shadow`: main page titles.
+- `transition`: buttons, logo and jQuery-revealed cards.
+- `multiple-columns`: the home-page community explanation.
+- `font-face`: the local EasyBusy text face used by that explanation.
+- `border-radius`: cards, buttons, badges and the multi-column panel.
 
 On successful login, the server signs a JWT containing only the user's database identifier. The client stores the token and sends it in the `Authorization` header when requesting a protected resource.
 
